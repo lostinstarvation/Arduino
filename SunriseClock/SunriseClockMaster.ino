@@ -46,8 +46,8 @@ void setup() {
 
   // Initialize the real-time clock module library and set the time manually
   rtc.begin();
-  // rtc.setTime(40, 55, 8, 1, 31, 10, 21); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
-  // rtc.set12Hour();
+  // rtc.setTime(0, 1, 16, 1, 7, 11, 21); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
+  // rtc.set24Hour();
 
   //Start talking with S7S display, clear display, set brightness to 75%, turn on colon
   serial7Segment.begin(9600);
@@ -59,34 +59,9 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  static int8_t lastSecond = -1;
-  static int8_t lastMinute = -1;
-  static int8_t displayHour = 0;
-  static int8_t displayMinute = 0;
   
   rtc.update();
-
-  //Useful for debugging, turned off for normal operation
-  // if (rtc.second() != lastSecond){ 
-  //   printTime();  
-  //  
-  //  lastSecond = rtc.second();
-  //}
-
-  if (rtc.minute() != lastMinute){
-    displayHour = rtc.hour();
-    displayMinute = rtc.minute();
-
-    sprintf(timeString, "HH:MM %02d:%02d", displayHour, displayMinute);
-    Serial.println(timeString);
-
-    sprintf(timeString, "%02d%02d", displayHour, displayMinute);
-    serial7Segment.print(timeString);
-
-    lastMinute = rtc.minute();
-  }
-  
+  // printTime();  //Useful for debugging, turned off for normal operation
+  updateDisplay();
   sunriseAnimation();  
 }
