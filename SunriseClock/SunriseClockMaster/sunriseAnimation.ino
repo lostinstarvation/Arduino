@@ -32,7 +32,7 @@ void sunriseAnimation(){
     FastLED.show();
     checkVar = 5;
   }
-  if(rtc.hour() == 6 && rtc.minute() == 35 && checkVar == 5){
+  if(rtc.hour() == 6 && rtc.minute() == 45 && checkVar == 5){
     for (int i = 0; i < NUM_LEDS; i++) {
       leds[i].red = 0;
       leds[i].blue = 0;
