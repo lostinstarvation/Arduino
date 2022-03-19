@@ -6,7 +6,7 @@ void updateDisplay() {
   static int8_t displayMinute = 0; 
    
   if (rtc.hour() != lastHour){
-    if(rtc.hour() > 12){
+    if(rtc.hour() >= 13){
       switch(rtc.hour()){
         case 13:
           displayHour = 1;

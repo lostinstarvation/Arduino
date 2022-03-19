@@ -46,7 +46,7 @@ void setup() {
 
   // Initialize the real-time clock module library and set the time manually
   rtc.begin();
-  // rtc.setTime(0, 1, 16, 1, 7, 11, 21); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
+  //rtc.setTime(30, 43, 17, 6, 18, 3, 22); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
   // rtc.set24Hour();
 
   //Start talking with S7S display, clear display, set brightness to 75%, turn on colon
