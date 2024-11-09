@@ -38,8 +38,8 @@ void setup() {
   //Setup FastLED for SparkFun Lumenati modules (APA201C)
   FastLED.addLeds<APA102, LED_DATA_PIN, LED_CLOCK_PIN, BGR>(leds, NUM_LEDS);
 
-  //Set global starting LED brightness. Set to 24 for testing
-  FastLED.setBrightness(10);      
+  //Set global starting LED brightness
+  FastLED.setBrightness(5);      
 
   // Use the serial monitor to view time/date output
   Serial.begin(9600);
@@ -64,5 +64,5 @@ void loop() {
   rtc.update();
   // printTime();  //Useful for debugging, turned off for normal operation
   updateDisplay();
-  sunriseAnimation();  
+  sunriseAnimation(5,30);  
 }

@@ -1,44 +1,31 @@
-void sunriseAnimation(){
+#include <cstdint>
 
- static int8_t checkVar = 0;
-  
-  if(rtc.hour() == 5 && rtc.minute() == 30 && checkVar == 0){
-      FastLED.setBrightness(10);      
-      for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i].red = 130;
-        leds[i].blue = 199;
-        leds[i].green = 218;
-        FastLED.show();
-      }   
-    checkVar = 1;
-  }
-  if(rtc.hour() == 5 && rtc.minute() == 35 && checkVar == 1){
-    FastLED.setBrightness(20);
+void setLEDBrightness(int8_t brightness){
+  FastLED.setBrightness(brightness);
+  FastLED.show();
+}
+
+void setLEDColor(int8_t red, int8_t green, int8_t blue){
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i].red = red;
+    leds[i].green = green;
+    leds[i].blue = blue;
     FastLED.show();
-    checkVar = 2;
-  }
-  if(rtc.hour() == 5 && rtc.minute() == 40 && checkVar == 2){
-    FastLED.setBrightness(26);
-    FastLED.show();
-    checkVar = 3;
-  }
-  if(rtc.hour() == 5 && rtc.minute() == 50 && checkVar == 3){
-    FastLED.setBrightness(32);
-    FastLED.show();
-    checkVar = 4;
-  }
-  if(rtc.hour() == 6 && rtc.minute() == 0 && checkVar == 4){
-    FastLED.setBrightness(40);
-    FastLED.show();
-    checkVar = 5;
-  }
-  if(rtc.hour() == 6 && rtc.minute() == 30 && checkVar == 5){
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].red = 0;
-      leds[i].blue = 0;
-      leds[i].green = 0;
-      FastLED.show();
+  }   
+}
+
+void sunriseAnimation(int8_t startHour, int8_t startMinute){
+  static int8_t checkVar = 0;
+  int8_t elapsedMinutes = (rtc.hour() * 60 + rtc.minute()) - (startHour * 60 + rtc.minute());
+
+  if(elapsedMinutes >=0 && elapsedMinutes <=60){
+    int8_t brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
+    if(elapsedMinutes == 0){
+      setLEDColor(130,218,199);
     }
-    checkVar = 0;
+    else if(elapsedMinutes == 60){
+      setLEDColor(0,0,0);
+    }
+    setLEDBrightness(brightness);
   }
 }
