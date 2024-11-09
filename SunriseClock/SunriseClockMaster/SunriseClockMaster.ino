@@ -39,21 +39,22 @@ void setup() {
   FastLED.addLeds<APA102, LED_DATA_PIN, LED_CLOCK_PIN, BGR>(leds, NUM_LEDS);
 
   //Set global starting LED brightness. Set to 24 for testing
-  FastLED.setBrightness(10);
+  FastLED.setBrightness(10);      
 
   // Use the serial monitor to view time/date output
   Serial.begin(9600);
 
   // Initialize the real-time clock module library and set the time manually
   rtc.begin();
-  //rtc.setTime(30, 43, 17, 6, 18, 3, 22); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
+  //rtc.autoTime();
+  //rtc.setTime(00, 27, 21, 1, 03, 11, 24); // SEC:MIN:HH Day(1(Sunday)-7), DD, MM, YY
   // rtc.set24Hour();
 
   //Start talking with S7S display, clear display, set brightness to 75%, turn on colon
   serial7Segment.begin(9600);
   serial7Segment.write('v');
   serial7Segment.write(0x7A);
-  serial7Segment.write((byte) 75);
+  serial7Segment.write((byte) 100);
   serial7Segment.write(0x77);
   serial7Segment.write((byte) 16);
 }
