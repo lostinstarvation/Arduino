@@ -15,17 +15,21 @@ void setLEDColor(int8_t red, int8_t green, int8_t blue){
 }
 
 void sunriseAnimation(int8_t startHour, int8_t startMinute){
-  static int8_t checkVar = 0;
+  static int8_t lastMinuteSunrise = -1;
+  
   int8_t elapsedMinutes = (rtc.hour() * 60 + rtc.minute()) - (startHour * 60 + startMinute);
 
-  if(elapsedMinutes >=0 && elapsedMinutes <=60){
-    int8_t brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
-    if(elapsedMinutes == 0){
-      setLEDColor(130,218,199);
+  if (elapsedMinutes >=0 && elapsedMinutes <=60){
+    if (rtc.minute() != lastMinuteSunrise){ //Only evaluate the brightness once per minute
+      int8_t brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
+      if (elapsedMinutes == 0){
+        setLEDColor(130,218,199);
+      }
+      else if (elapsedMinutes == 60){
+        setLEDColor(0,0,0);
+      }
+      setLEDBrightness(brightness);
+      lastMinuteSunrise = rtc.minute();
     }
-    else if(elapsedMinutes == 60){
-      setLEDColor(0,0,0);
-    }
-    setLEDBrightness(brightness);
   }
 }

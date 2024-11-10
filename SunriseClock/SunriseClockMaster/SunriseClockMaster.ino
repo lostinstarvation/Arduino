@@ -19,10 +19,6 @@
 #define SERIAL_CLOCK_RX_PIN 7
 #define SERIAL_CLOCK_TX_PIN 8
 
-//Time for alarm
-#define alarmHour 6
-#define alarmMin 30
-
 //Create the LED array
 CRGB leds[NUM_LEDS];
 
