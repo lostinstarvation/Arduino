@@ -22,13 +22,14 @@ void sunriseAnimation(int8_t startHour, int8_t startMinute){
   if (elapsedMinutes >=0 && elapsedMinutes <=60){
     if (rtc.minute() != lastMinuteSunrise){ //Only evaluate the brightness once per minute
       int8_t brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
+      setLEDBrightness(brightness);
+      
       if (elapsedMinutes == 0){
         setLEDColor(130,218,199);
       }
       else if (elapsedMinutes == 60){
         setLEDColor(0,0,0);
       }
-      setLEDBrightness(brightness);
       lastMinuteSunrise = rtc.minute();
     }
   }
