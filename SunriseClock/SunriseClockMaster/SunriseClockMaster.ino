@@ -60,5 +60,5 @@ void loop() {
   rtc.update();
   // printTime();  //Useful for debugging, turned off for normal operation
   updateDisplay();
-  sunriseAnimation(5,30);  
+  sunriseAnimation(5,30);
 }

@@ -1,5 +1,3 @@
-#include <cstdint>
-
 void setLEDBrightness(int8_t brightness){
   FastLED.setBrightness(brightness);
   FastLED.show();
