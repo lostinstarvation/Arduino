@@ -1,9 +1,9 @@
-void setLEDBrightness(int8_t brightness){
+void setLEDBrightness(int brightness){
   FastLED.setBrightness(brightness);
   FastLED.show();
 }
 
-void setLEDColor(int8_t red, int8_t green, int8_t blue){
+void setLEDColor(int red, int green, int blue){
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i].red = red;
     leds[i].green = green;
@@ -12,17 +12,17 @@ void setLEDColor(int8_t red, int8_t green, int8_t blue){
   }   
 }
 
-void sunriseAnimation(int8_t startHour, int8_t startMinute){
-  static int8_t lastMinuteSunrise = -1;
+void sunriseAnimation(int startHour, int startMinute){
+  static int lastMinuteSunrise = -1;
 
-  int8_t currentHour = rtc.hour();
-  int8_t currentMinute = rtc.minute();
-  
-  int16_t elapsedMinutes = (currentHour * 60 + currentMinute) - (startHour * 60 + startMinute);
+  int currentHour = rtc.hour();
+  int currentMinute = rtc.minute();
 
-  if (elapsedMinutes >=0 && elapsedMinutes <=60){
-    if (currentMinute != lastMinuteSunrise){ //Only evaluate the brightness once per minute
-      int8_t brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
+  if (currentMinute != lastMinuteSunrise){ //Only evaluate once per minute
+    int elapsedMinutes = (currentHour * 60 + currentMinute) - (startHour * 60 + startMinute);
+
+    if (elapsedMinutes >=0 && elapsedMinutes <=60){
+      int brightness = map(elapsedMinutes, 0, 60, 5, 40); //adjust brightness between 5 and 40 based on length of elapsed minutes
       setLEDBrightness(brightness);
       
       if (elapsedMinutes == 0){
